@@ -4,6 +4,7 @@ MAINTAINER Enes Gür
 
 # Install Packages
 RUN apt-get update
+RUN apt-get upgrade -y
 RUN apt-get install nginx php5 supervisor php5-fpm php5-xdebug php5-json php5-curl php5-redis php5-memcache php5-mysql php5-curl php5-mcrypt php-soap php5-gd php5-gmp -y
 
 # Enable PHP Extension Settings Before Run PHP-FPM
