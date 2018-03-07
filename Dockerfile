@@ -1,22 +1,12 @@
-FROM ubuntu:17.04
+FROM debian:stretch
 
 MAINTAINER Enes Gür
 
 # Install Packages
-RUN apt-get update
-RUN apt-get upgrade -y
-#RUN apt-get install --no-install-recommends software-properties-common python-software-properties -y
-#RUN add-apt-repository ppa:ondrej/php -y
-RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu zesty main" >> /etc/apt/sources.list
-RUN echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu zesty main" >> /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get install nginx php7.1 supervisor php7.1-fpm php7.1-xdebug php7.1-json php7.1-curl php7.1-redis php7.1-memcache php7.1-mysql php7.1-curl php7.1-mcrypt php7.1-soap php7.1-gd php7.1-gmp php7.1-intl php7.1-mbstring -y --allow-unauthenticated
-
-# Remove Apache2 Dependency 
-RUN apt-get remove apache2 -y && apt-get autoremove -y
-
-# Enable PHP Extension Settings Before Run PHP-FPM
-RUN phpenmod redis json curl memcache mysqli opcache pdo pdo_mysql readline xdebug intl mbstring
+RUN apt-get update -y
+RUN apt-get install vim wget curl supervisor -y
+RUN wget -O - https://packages.sury.org/php/README.txt | bash
+RUN apt-get install nginx php7.1 php7.1-fpm php7.1-curl php7.1-json php7.1-xml php7.1-gd php7.1-soap php7.1-intl php7.1-mbstring php7.1-mcrypt php7.1-mysql php-redis php7.1-xml php7.1-zip php-yaml php-xdebug php-memcache -y
 
 RUN echo "[supervisord]" >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo "nodaemon=true" >> /etc/supervisor/conf.d/supervisord.conf
