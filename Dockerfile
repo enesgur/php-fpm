@@ -6,13 +6,13 @@ MAINTAINER Enes Gür
 RUN apt-get update -y
 RUN apt-get install vim wget curl supervisor -y
 RUN wget -O - https://packages.sury.org/php/README.txt | bash
-RUN apt-get install nginx php7.1 php7.1-fpm php7.1-curl php7.1-json php7.1-xml php7.1-gd php7.1-soap php7.1-intl php7.1-mbstring php7.1-mcrypt php7.1-mysql php-redis php7.1-xml php7.1-zip php-yaml php-xdebug php-memcache composer -y
+RUN apt-get install nginx php7.2 php7.2-fpm php7.2-curl php7.2-json php7.2-xml php7.2-gd php7.2-soap php7.2-intl php7.2-mbstring php7.2-mysql php-redis php7.2-xml php7.2-zip php-yaml php-xdebug php-memcache composer -y
 
 RUN echo "[supervisord]" >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo "nodaemon=true" >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo "" >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo "[program:php7-fpm]" >> /etc/supervisor/conf.d/supervisord.conf
-RUN echo "command=/etc/init.d/php7.1-fpm start" >> /etc/supervisor/conf.d/supervisord.conf
+RUN echo "command=/etc/init.d/php7.2-fpm start" >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo "autostart=true" >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo "autorestart=true" >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo "stderr_logfile=/var/log/php-fpm.err.log" >> /etc/supervisor/conf.d/supervisord.conf
